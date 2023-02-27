@@ -62,7 +62,8 @@ def compute_memorization(all_texts_list, human_references, n=4):
 
 def compute_mauve(all_texts_list, human_references, model_id):
     torch.cuda.empty_cache() 
-    assert model_id in {'gpt2-large', 'all-mpnet-base-v2'}
+    # assert model_id in {'gpt2-large', 'all-mpnet-base-v2'}
+    print(model_id)
     mauve = load("mauve")
     assert len(all_texts_list) == len(human_references)
 
