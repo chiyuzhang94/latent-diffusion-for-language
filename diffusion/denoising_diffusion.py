@@ -647,7 +647,7 @@ class Trainer(object):
 
             for mauve_model_id in ["gpt2-large", "all-mpnet-base-v2"]:
                 for key, reference_text in reference_texts.items():
-                    metrics[f"model/{strategy}/{mauve_model_id}_{class_id_prefix}{key}_mauve"], _ = evaluation.compute_mauve(all_texts_list, reference_text, mauve_model_id)
+                    metrics[f"model/{strategy}/{mauve_model_id}_{class_id_prefix}{key}_mauve"], _ = evaluation.compute_mauve(all_texts_list, reference_text, os.path.join(self.args.evaluate_model_dir, mauve_model_id))
 
         if len(self.reference_dict) == 0 or test:
             self.log_reference_metrics(test)

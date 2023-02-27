@@ -96,6 +96,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Training arguments")
     parser.add_argument("--dataset_name", type=str, default=None)
     parser.add_argument("--save_dir", type=str, default="saved_models")
+    parser.add_argument("--evaluate_model_dir", type=str, default="saved_models")
     parser.add_argument("--output_dir", type=str, default=None)
     parser.add_argument("--wandb_name", type=str, default=None)
     # Data Hyperparameters
