@@ -677,7 +677,8 @@ class Trainer(object):
 
 
                 for grad_accum_step in range(self.gradient_accumulate_every):
-                    data = next(self.data_iter).to(device)
+                    data = next(self.data_iter)
+                    data = {k: v.to(device) for k, v in data.items()}
                     with torch.no_grad():
                         latent = self.bart_model.get_encoder()(input_ids = data['input_ids'], attention_mask = data['attention_mask']).last_hidden_state
                         if self.args.normalize_latent:
@@ -728,7 +729,9 @@ class Trainer(object):
                             total_val_loss = 0.
                             total_val_ema_loss = 0.
                             for grad_accum_step in range(self.gradient_accumulate_every):
-                                data = next(self.val_iter).to(device)
+                                data = next(self.val_iter)
+                                data = {k: v.to(device) for k, v in data.items()}
+
                                 latent = self.bart_model.get_encoder()(input_ids = data['input_ids'], attention_mask = data['attention_mask']).last_hidden_state
                                 if self.args.normalize_latent or self.args.scale_latent:
                                     latent = self.diffusion.normalize_latent(latent)
