@@ -13,7 +13,9 @@ ATTN_HEAD_DIM=64
 
 def main(args):
     config = AutoConfig.from_pretrained(args.enc_dec_model)
-    assert args.tx_dim%ATTN_HEAD_DIM==0, f'Transformer dimension must be divisible by {ATTN_HEAD_DIM}'
+    assert args.tx_dim % ATTN_HEAD_DIM == 0, 'Transformer dimension must be divisible by {}'.format(ATTN_HEAD_DIM)
+
+    #assert args.tx_dim%ATTN_HEAD_DIM==0, f'Transformer dimension must be divisible by {ATTN_HEAD_DIM}'
     model = DiffusionTransformer(
         tx_dim = args.tx_dim,
         tx_depth = args.tx_depth,
