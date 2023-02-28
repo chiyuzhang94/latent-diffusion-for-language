@@ -67,13 +67,13 @@ def compute_mauve(all_texts_list, human_references, model_id):
     mauve = load("mauve")
     assert len(all_texts_list) == len(human_references)
 
-    if model_id == 'all-mpnet-base-v2':
+    if 'all-mpnet-base-v2' in model_id:
         model = SentenceTransformer(model_id).cuda()
         #Sentences are encoded by calling model.encode()
         all_texts_list_embedding = model.encode(all_texts_list)
         human_references_embedding = model.encode(human_references)
         results = mauve.compute(predictions=all_texts_list, p_features=all_texts_list_embedding, references=human_references, q_features=human_references_embedding, featurize_model_name=model_id, max_text_length=256, device_id=0, mauve_scaling_factor=8,)
-    elif model_id == 'gpt2-large':
+    elif 'gpt2-large' in model_id:
         results = mauve.compute(predictions=all_texts_list, references=human_references, featurize_model_name=model_id, max_text_length=256, device_id=0)
     else:
         raise NotImplementedError
